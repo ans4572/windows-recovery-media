@@ -9,7 +9,8 @@
 
 역할: 코딩, UI 제작
 
-실행 명령어 예시
+
+*실행 명령어 예시
 
 백업: dism.exe /capture-ffu /imagefile:e:\test.ffu /CaptureDrive:\\.\PhysicalDrive0 /Name:Drive0
 
