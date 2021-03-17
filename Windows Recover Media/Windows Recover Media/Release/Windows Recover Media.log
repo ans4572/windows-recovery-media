@@ -1,0 +1,10 @@
+﻿  Recover Media.cpp
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(71,16): warning C4101: 'stDiskGeometry' :참조되지 않은 지역 변수입니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(108,7): warning C4101: 'ret' :참조되지 않은 지역 변수입니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(254,11): warning C4101: 'pszInitPath' :참조되지 않은 지역 변수입니다.
+  코드를 생성하고 있습니다.
+  0 of 254 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  Windows Recover Media.vcxproj -> C:\Users\mason.moon\source\repos\Windows Recover Media\Release\Windows Recover Media.exe
