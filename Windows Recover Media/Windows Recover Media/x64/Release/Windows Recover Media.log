@@ -1,15 +1,15 @@
 ﻿  Recover Media.cpp
   _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(53,34): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(111,34): warning C4244: '=': 'double'에서 'ULONGLONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(128,7): warning C4101: 'ret' :참조되지 않은 지역 변수입니다.
-C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(247,19): warning C4244: '초기화 중': 'LRESULT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(260,41): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(274,19): warning C4244: '초기화 중': 'LRESULT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(287,41): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(55,34): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(113,34): warning C4244: '=': 'double'에서 'ULONGLONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(130,7): warning C4101: 'ret' :참조되지 않은 지역 변수입니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(252,19): warning C4244: '초기화 중': 'LRESULT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(267,41): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(281,19): warning C4244: '초기화 중': 'LRESULT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\mason.moon\source\repos\Windows Recover Media\Windows Recover Media\Recover Media.cpp(296,41): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  1 of 357 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  2 of 357 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Windows Recover Media.vcxproj -> C:\Users\mason.moon\source\repos\Windows Recover Media\x64\Release\Windows Recover Media.exe

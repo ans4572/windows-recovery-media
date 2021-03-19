@@ -34,11 +34,12 @@ OPENFILENAME OFN;                     // 파일열기 대화상자를 초기화하기 위한 변�
 const UINT nFileNameMaxLen = 512;     // 다음 줄에 정의하는 szFileName 문자열의 최대 길이
 WCHAR szFileName[nFileNameMaxLen];    // 파일의 경로 및 이름을 복사하기 위한 문자열
 
-BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam);  //다이얼로그 윈도우 선언
 
 wstring diskList[26];                //물리디스크 리스트를 저장할 배열 선언
 ULONGLONG diskSize[26];              //물리디스크 크기 저장 배열 선언          
 
+//윈도우 지정 변수들
 HWND hDlg;
 HWND hTabCtrl;
 HWND imagePath;
@@ -49,6 +50,7 @@ HWND runBtn;
 
 int tabIndex = 0;   //tab 인덱스 
 
+//TCHAR 형을 String으로 변경하여 반환하는 함수
 string TCHARToString(TCHAR* ptsz) {
 	int len = wcslen((wchar_t*)ptsz);
 
@@ -62,7 +64,7 @@ string TCHARToString(TCHAR* ptsz) {
 	return s;
 }
 
-//physical drive 리스트 가져오는 함수
+//physical disk 리스트 가져오는 함수
 void GetDiskGeometry()
 {
 	HANDLE	hDevice;			// handle to the drive to be examined
@@ -104,11 +106,11 @@ void GetDiskGeometry()
 
 		CloseHandle(hDevice);
 
-
+		//disk 사이즈 계산
 		ULONGLONG DiskSize = stDiskGeometryEx.Geometry.Cylinders.QuadPart * (ULONG)stDiskGeometryEx.Geometry.TracksPerCylinder *
 			(ULONG)stDiskGeometryEx.Geometry.SectorsPerTrack * (ULONG)stDiskGeometryEx.Geometry.BytesPerSector;
-		
-		diskSize[i] = (double)DiskSize / (1024 * 1024 * 1024);
+
+		diskSize[i] = (double)DiskSize / (1024 * 1024 * 1024); //저장
 
 	}
 
@@ -119,7 +121,7 @@ void GetDiskGeometry()
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	PWSTR lpCmdLine, int nCmdShow) {
 
-	GetDiskGeometry();   // 디스크 리스트 불러오기
+	GetDiskGeometry();        // 디스크 리스트 불러오기
 
 	InitCommonControls();
 
@@ -140,7 +142,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	return (int)msg.wParam;
 }
 
-//Tab 컨트롤
+//다이얼로그 윈도우
 BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam) {
 	TC_ITEM tItem;
 	wstring strFolder;
@@ -148,15 +150,15 @@ BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam)
 
 	switch (iMessage)
 	{
-		// 탭 초기 설정
+	// 초기 설정
 	case WM_INITDIALOG: {
 		hTabCtrl = GetDlgItem(hDlg, IDC_TAB1);
 		tItem.mask = TCIF_TEXT;
-		tItem.pszText = (LPWSTR)L"Restore";
-		TabCtrl_InsertItem(hTabCtrl, 0, &tItem);
+		tItem.pszText = (LPWSTR)L"Recovery";
+		TabCtrl_InsertItem(hTabCtrl, 0, &tItem);  //recovery 탭 추가
 
 		tItem.pszText = (LPWSTR)L"BackUp";
-		TabCtrl_InsertItem(hTabCtrl, 1, &tItem);
+		TabCtrl_InsertItem(hTabCtrl, 1, &tItem);  //backup 탭 추가
 
 		// 필요한 ID 가져오기 
 		imagePath = GetDlgItem(hDlg, IDC_PATH);
@@ -169,6 +171,7 @@ BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		ShowWindow(backUpName, SW_HIDE);
 		ShowWindow(backUpNameStatic, SW_HIDE);
 
+		//diskLiskBox에 값 넣기
 		for (int i = 0; i < 26; ++i) {
 			if (diskList[i].empty())
 				break;
@@ -185,6 +188,7 @@ BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
+	//닫기 버튼 눌렀을 때
 	case WM_CLOSE:
 		EndDialog(hDlg, FALSE);
 		PostQuitMessage(0);
@@ -221,6 +225,7 @@ BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
 		{
+		//'select path' 버튼을 누른 경우
 		case IDC_BROWSER: {
 			LPCTSTR fileFilter = _T("FFU files (*.FFU) | *.FFU");
 
@@ -238,20 +243,22 @@ BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam)
 
 			return 0;
 		}
-
+		//'run' 버튼을 누른 경우
 		case IDC_RUN: {
 			//복구 
 			if (tabIndex == 0) {
 				TCHAR recoverFilePath[100], captureDrive[100];
 
-				int selection = SendMessage(diskListBox, LB_GETCURSEL, 0, 0);  //위치 얻어오기
+				int selection = SendMessage(diskListBox, LB_GETCURSEL, 0, 0);          //위치 얻어오기
 				SendMessage(diskListBox, LB_GETTEXT, selection, (LPARAM)captureDrive); // 위치에 있는 문자열 얻어오기
 
-				GetWindowText(imagePath, recoverFilePath, 100);
+				GetWindowText(imagePath, recoverFilePath, 100);     //imagePath에 있는 텍스트를 recoverFilePath에 복사
 
+				// 경로 지정이 안된 경우
 				if (TCHARToString(recoverFilePath) == "") {
 					MessageBox(hDlg, L"Please Select FilePath!", L"Error", MB_OK);
 				}
+				// disk 선택이 안된 경우
 				else if (selection == -1) {
 					MessageBox(hDlg, L"Please Select Disk!", L"Error", MB_OK);
 				}
@@ -271,14 +278,16 @@ BOOL CALLBACK DialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			else if (tabIndex == 1) {
 				TCHAR backupFilePath[100], captureDrive[100];
 
-				int selection = SendMessage(diskListBox, LB_GETCURSEL, 0, 0);  //위치 얻어오기
+				int selection = SendMessage(diskListBox, LB_GETCURSEL, 0, 0);          //위치 얻어오기
 				SendMessage(diskListBox, LB_GETTEXT, selection, (LPARAM)captureDrive); // 위치에 있는 문자열 얻어오기
 
 				GetWindowText(imagePath, backupFilePath, 100);
 
+				// 경로 지정이 안된 경우
 				if (TCHARToString(backupFilePath) == "") {
 					MessageBox(hDlg, L"Please Select FilePath!", L"Error", MB_OK);
 				}
+				// disk 선택이 안된 경우
 				else if (selection == -1) {
 					MessageBox(hDlg, L"Please Select Disk!", L"Error", MB_OK);
 				}
