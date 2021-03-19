@@ -9,8 +9,18 @@
 
 역할: 코딩, UI 제작
 
+*실행 화면
+(1) 복구 화면
 
-*실행 명령어 예시
+![Recovery](https://user-images.githubusercontent.com/22833414/111716255-fa427d00-8898-11eb-9b50-924238ef55f6.PNG)
+
+(2) 백업 화면 
+
+![Backup](https://user-images.githubusercontent.com/22833414/111716260-fadb1380-8898-11eb-91fe-08acb5fd1cb3.PNG)
+
+
+
+*프로그램에 적용된 명령어 예시
 
 백업: dism.exe /capture-ffu /imagefile:e:\test.ffu /CaptureDrive:\\.\PhysicalDrive0 /Name:Drive0
 
